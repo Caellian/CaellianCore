@@ -31,10 +31,10 @@ import java.util.function.Function;
  * This map is a modified version of {@link Map} created to optimise
  * code for game PetulantArcher and other games later designed by
  * Skythees.
- *
+ * <p>
  * It allows 3 keys per value thus making this map more effective than
  * map of a map of a map containing the {@code <V>}.
- *
+ * <p>
  * All further documentation can be found on Oracle's website
  * or contained within {@link Map} class.
  *
@@ -941,7 +941,7 @@ public interface ThreeDimensionalMap<X, Y, Z, V> extends Serializable
 		 */
 		static <X extends Comparable<? super X>, Y extends Comparable<? super Y>, Z extends Comparable<? super Z>, V> Comparator<ThreeDimensionalMap.Entry<X, Y, Z, V>> comparingByKey()
 		{
-			return (Comparator<ThreeDimensionalMap.Entry<X, Y, Z, V>> & Serializable) (c1, c2)->new Coordinates<>(c1.getX(),c1.getY(),c1.getZ()).compareTo(new Coordinates<>(c2.getX(),c2.getY(),c2.getZ()));
+			return (Comparator<ThreeDimensionalMap.Entry<X, Y, Z, V>> & Serializable) (c1, c2)->new Coordinates<>(c1.getX(), c1.getY(), c1.getZ()).compareTo(new Coordinates<>(c2.getX(), c2.getY(), c2.getZ()));
 		}
 
 		/**
@@ -1041,7 +1041,7 @@ public interface ThreeDimensionalMap<X, Y, Z, V> extends Serializable
 		static <X, Y, Z, V> Comparator<ThreeDimensionalMap.Entry<X, Y, Z, V>> comparingByKey(Comparator<? super Coordinates> cmp)
 		{
 			Objects.requireNonNull(cmp);
-			return (Comparator<ThreeDimensionalMap.Entry<X,Y,Z, V>> & Serializable) (c1, c2)->cmp.compare(new Coordinates(c1.getX(),c1.getY(),c1.getZ()), new Coordinates(c2.getX(),c2.getY(),c2.getZ()));
+			return (Comparator<ThreeDimensionalMap.Entry<X, Y, Z, V>> & Serializable) (c1, c2)->cmp.compare(new Coordinates(c1.getX(), c1.getY(), c1.getZ()), new Coordinates(c2.getX(), c2.getY(), c2.getZ()));
 		}
 
 		/**
@@ -1051,9 +1051,12 @@ public interface ThreeDimensionalMap<X, Y, Z, V> extends Serializable
 		 * <p>The returned comparator is serializable if the specified comparator
 		 * is also serializable.
 		 *
-		 * @param <X> the type of the map x coordinates
-		 * @param <Y> the type of the map y coordinates
-		 * @param <Z> the type of the map z coordinates
+		 * @param <X>
+		 * 		  the type of the map x coordinates
+		 * @param <Y>
+		 * 		  the type of the map y coordinates
+		 * @param <Z>
+		 * 		  the type of the map z coordinates
 		 * @param <V>
 		 * 		  the type of the map values
 		 * @param cmp
@@ -1061,10 +1064,10 @@ public interface ThreeDimensionalMap<X, Y, Z, V> extends Serializable
 		 *
 		 * @return a comparator that compares {@link ThreeDimensionalMap.Entry} by the value.
 		 */
-		static <X,Y,Z, V> Comparator<ThreeDimensionalMap.Entry<X,Y,Z, V>> comparingByValue(Comparator<? super V> cmp)
+		static <X, Y, Z, V> Comparator<ThreeDimensionalMap.Entry<X, Y, Z, V>> comparingByValue(Comparator<? super V> cmp)
 		{
 			Objects.requireNonNull(cmp);
-			return (Comparator<ThreeDimensionalMap.Entry<X,Y,Z, V>> & Serializable) (c1, c2)->cmp.compare(c1.getValue(), c2.getValue());
+			return (Comparator<ThreeDimensionalMap.Entry<X, Y, Z, V>> & Serializable) (c1, c2)->cmp.compare(c1.getValue(), c2.getValue());
 		}
 
 		/**

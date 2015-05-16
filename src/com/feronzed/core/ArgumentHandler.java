@@ -23,39 +23,49 @@ import java.util.HashMap;
 /**
  * Created on 06.03.15.
  */
-public class ArgumentHandler {
-    private HashMap<String, Action> argumentMap = new HashMap<>();
+public class ArgumentHandler
+{
+	private HashMap<String, Action> argumentMap = new HashMap<>();
 
-    public void addArgument(String argument, Action result) {
-        argumentMap.put(argument, result);
-    }
+	public void addArgument(String argument, Action result)
+	{
+		argumentMap.put(argument, result);
+	}
 
-    public void removeArgument(String argument) {
-        argumentMap.remove(argument);
-    }
+	public void removeArgument(String argument)
+	{
+		argumentMap.remove(argument);
+	}
 
-    public void clearAllArguments() {
-        argumentMap.clear();
-    }
+	public void clearAllArguments()
+	{
+		argumentMap.clear();
+	}
 
-    protected HashMap<String, Action> getAllArguments() {
-        return argumentMap;
-    }
+	public void bind(ArgumentHandler argumentHandler)
+	{
+		argumentMap.putAll(argumentHandler.getAllArguments());
+	}
 
-    public void bind(ArgumentHandler argumentHandler) {
-        argumentMap.putAll(argumentHandler.getAllArguments());
-    }
+	protected HashMap<String, Action> getAllArguments()
+	{
+		return argumentMap;
+	}
 
-    public boolean handleArguments(String[] args) {
-        for (final String input : args) {
-            if (argumentMap.containsKey(input)) {
-                return argumentMap.get(input).execute();
-            }
-        }
-        return true;
-    }
+	public boolean handleArguments(String[] args)
+	{
+		for (final String input : args)
+		{
+			if (argumentMap.containsKey(input))
+			{
+				return argumentMap.get(input).execute();
+			}
+		}
+		return true;
+	}
 
-    public interface Action {
-        public boolean execute();
-    }
+	public interface Action
+	{
+		boolean execute();
+	}
 }

@@ -26,125 +26,169 @@ import java.util.Properties;
  * Created on 06.03.15.
  */
 @SuppressWarnings("UnusedDeclaration")
-public class Configuration {
-    private Properties properties = new Properties();
-    private IConfiguration configurationClass;
-    private String documentName = "settings.cfg";
+public class Configuration
+{
+	private Properties properties = new Properties();
+	private IConfiguration configurationClass;
+	private String documentName = "settings.cfg";
+	private State  currentState = State.NULL;
 
-    public enum State {NULL, DORMANT, IN_PROGRESS, FINISHED, FAILED}
+	public Configuration(IConfiguration parConfigurationClass)
+	{
+		configurationClass = parConfigurationClass;
+		currentState = State.DORMANT;
+	}
 
-    private State currentState = State.NULL;
+	public void changeConfigName(String name)
+	{
+		documentName = name + ".cfg";
+	}
 
-    public Configuration(IConfiguration parConfigurationClass) {
-        configurationClass = parConfigurationClass;
-        currentState = State.DORMANT;
-    }
+	public void loadConfig()
+	{
+		if (currentState != State.NULL && currentState != State.IN_PROGRESS)
+		{
+			ConfigurationLoader configurationLoader = new ConfigurationLoader();
+			configurationLoader.setDaemon(true);
+			configurationLoader.start();
+		}
+	}
 
-    public void changeConfigName(String name) {
-        documentName = name + ".cfg";
-    }
+	public State getCurrentState()
+	{
+		return currentState;
+	}
 
-    public void loadConfig() {
-        if (currentState != State.NULL && currentState != State.IN_PROGRESS) {
-            ConfigurationLoader configurationLoader = new ConfigurationLoader();
-            configurationLoader.setDaemon(true);
-            configurationLoader.start();
-        }
-    }
+	public enum State
+	{
+		NULL, DORMANT, IN_PROGRESS, FINISHED, FAILED
+	}
 
-    public State getCurrentState(){
-        return currentState;
-    }
+	@SuppressWarnings("ResultOfMethodCallIgnored")
+	protected class ConfigurationLoader extends Thread
+	{
+		private boolean stop = false;
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    protected class ConfigurationLoader extends Thread {
+		@Override
+		public void run()
+		{
+			if (stop)
+			{
+				try
+				{
+					Thread.sleep(1000);
+					return;
+				} catch (InterruptedException e)
+				{
+					return;
+				}
+			}
+			currentState = Configuration.State.IN_PROGRESS;
+			try
+			{
 
-        private boolean stop = false;
+				File testFile = new File(documentName);
+				if (!testFile.exists())
+				{
+					testFile.createNewFile();
+				}
+				else
+				{
+					if (testFile.isDirectory())
+					{
+						testFile.delete();
+						testFile.createNewFile();
+					}
+				}
 
-        @Override
-        public void run() {
-            if (stop) {
-                try {
-                    Thread.sleep(1000);
-                    return;
-                } catch (InterruptedException e) {
-                    return;
-                }
-            }
-            currentState = Configuration.State.IN_PROGRESS;
-            try {
+				properties.load(new FileInputStream(documentName));
 
-                File testFile = new File(documentName);
-                if(!testFile.exists()){
-                    testFile.createNewFile();
-                } else {
-                    if (testFile.isDirectory()){
-                        testFile.delete();
-                        testFile.createNewFile();
-                    }
-                }
+				Class configClass = configurationClass.getClass();
+				Field[] configurationOptions = configClass.getDeclaredFields();
 
-                properties.load(new FileInputStream(documentName));
+				for (final Field field : configurationOptions)
+				{
+					if (properties.getProperty(field.getName().toLowerCase()) != null)
+					{
+						try
+						{
+							field.setAccessible(true);
+							if (field.getType().isAssignableFrom(Byte.class))
+							{
+								field.set(field, Byte.parseByte(properties.getProperty(field.getName().toLowerCase())));
+							}
+							else if (field.getType().isAssignableFrom(Short.class))
+							{
+								field.set(field, Short.parseShort(properties.getProperty(field.getName().toLowerCase())));
+							}
+							else if (field.getType().isAssignableFrom(Integer.class))
+							{
+								field.set(field, Integer.parseInt(properties.getProperty(field.getName().toLowerCase())));
+							}
+							else if (field.getType().isAssignableFrom(Long.class))
+							{
+								field.set(field, Long.parseLong(properties.getProperty(field.getName().toLowerCase())));
+							}
+							else if (field.getType().isAssignableFrom(Float.class))
+							{
+								field.set(field, Float.parseFloat(properties.getProperty(field.getName().toLowerCase())));
+							}
+							else if (field.getType().isAssignableFrom(Double.class))
+							{
+								field.set(field, Double.parseDouble(properties.getProperty(field.getName().toLowerCase())));
+							}
+							else if (field.getType().isAssignableFrom(Boolean.class))
+							{
+								field.set(field, Boolean.parseBoolean(properties.getProperty(field.getName().toLowerCase())));
+							}
+							else if (field.getType().isAssignableFrom(Character.class))
+							{
+								field.set(field, properties.getProperty(field.getName().toLowerCase()).toCharArray()[0]);
+							}
+						} catch (Exception e)
+						{
+							e.printStackTrace();
+							System.err.println("Unable to load configuration for '" + field.getName() + "', skipping...");
+						}
+					}
+					else
+					{
+						try
+						{
+							field.setAccessible(true);
+							properties.setProperty(field.getName().toLowerCase(), field.get(field).toString());
+						} catch (IllegalAccessException e)
+						{
+							System.err.println("Unable to store configuration for '" + field.getName() + "', skipping...");
+							e.printStackTrace();
+						}
+					}
+				}
 
-                Class configClass = configurationClass.getClass();
-                Field[] configurationOptions = configClass.getDeclaredFields();
+				File file = new File(documentName);
+				OutputStream out = new FileOutputStream(file);
+				properties.store(out, "Configuration file:");
 
-                for (final Field field : configurationOptions) {
-                    if (properties.getProperty(field.getName().toLowerCase()) != null) {
-                        try {
-                            field.setAccessible(true);
-                            if (field.getType().isAssignableFrom(Byte.class)) {
-                                field.set(field, Byte.parseByte(properties.getProperty(field.getName().toLowerCase())));
-                            } else if (field.getType().isAssignableFrom(Short.class)) {
-                                field.set(field, Short.parseShort(properties.getProperty(field.getName().toLowerCase())));
-                            } else if (field.getType().isAssignableFrom(Integer.class)) {
-                                field.set(field, Integer.parseInt(properties.getProperty(field.getName().toLowerCase())));
-                            } else if (field.getType().isAssignableFrom(Long.class)) {
-                                field.set(field, Long.parseLong(properties.getProperty(field.getName().toLowerCase())));
-                            } else if (field.getType().isAssignableFrom(Float.class)) {
-                                field.set(field, Float.parseFloat(properties.getProperty(field.getName().toLowerCase())));
-                            } else if (field.getType().isAssignableFrom(Double.class)) {
-                                field.set(field, Double.parseDouble(properties.getProperty(field.getName().toLowerCase())));
-                            } else if (field.getType().isAssignableFrom(Boolean.class)) {
-                                field.set(field, Boolean.parseBoolean(properties.getProperty(field.getName().toLowerCase())));
-                            } else if (field.getType().isAssignableFrom(Character.class)) {
-                                field.set(field, properties.getProperty(field.getName().toLowerCase()).toCharArray()[0]);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            System.err.println("Unable to load configuration for '" + field.getName() + "', skipping...");
-                        }
-                    } else {
-                        try {
-                            field.setAccessible(true);
-                            properties.setProperty(field.getName().toLowerCase(), field.get(field).toString());
-                        } catch (IllegalAccessException e) {
-                            System.err.println("Unable to store configuration for '" + field.getName() + "', skipping...");
-                            e.printStackTrace();
-                        }
-                    }
-                }
-
-                File file = new File(documentName);
-                OutputStream out = new FileOutputStream(file);
-                properties.store(out, "Configuration file:");
-
-            } catch (FileNotFoundException fnf) {
-                System.err.println("Couldn't find '" + documentName + "' file.");
-                currentState = Configuration.State.FAILED;
-            } catch (IOException ioe) {
-                System.err.println("Unable to write '" + documentName + "' file.");
-                currentState = Configuration.State.FAILED;
-            }
-            currentState = Configuration.State.FINISHED;
-            try {
-                this.join();
-            } catch (InterruptedException e) {
-                System.err.println("Unable to stop configuration loading thread.");
-                System.err.println("Using alternative method of preventing code execution.");
-                stop = true;
-                e.printStackTrace();
-            }
-        }
-    }
+			} catch (FileNotFoundException fnf)
+			{
+				System.err.println("Couldn't find '" + documentName + "' file.");
+				currentState = Configuration.State.FAILED;
+			} catch (IOException ioe)
+			{
+				System.err.println("Unable to write '" + documentName + "' file.");
+				currentState = Configuration.State.FAILED;
+			}
+			currentState = Configuration.State.FINISHED;
+			try
+			{
+				this.join();
+			} catch (InterruptedException e)
+			{
+				System.err.println("Unable to stop configuration loading thread.");
+				System.err.println("Using alternative method of preventing code execution.");
+				stop = true;
+				e.printStackTrace();
+			}
+		}
+	}
 }

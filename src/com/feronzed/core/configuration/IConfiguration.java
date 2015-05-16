@@ -21,5 +21,6 @@ package com.feronzed.core.configuration;
 /**
  * Created on 06.03.15.
  */
-public interface IConfiguration {
+public interface IConfiguration
+{
 }
