@@ -22,6 +22,11 @@ import java.io.Serializable;
 
 /**
  * Created on 10.5.2015. at 1:27.
+ *
+ * Convenience class firstly created for game Petulant archer as a key substitute for maps.
+ * This is supposed to allow maps to use 3D (3 variable keys) keys.
+ *
+ * @author Feronzed
  */
 public class Coordinates<X, Y, Z> implements Comparable, Serializable
 {
@@ -93,6 +98,21 @@ public class Coordinates<X, Y, Z> implements Comparable, Serializable
 		return z;
 	}
 
+	public void setX(X x)
+	{
+		this.x = x;
+	}
+
+	public void setY(Y y)
+	{
+		this.y = y;
+	}
+
+	public void setZ(Z z)
+	{
+		this.z = z;
+	}
+
 	@Override
 	public int hashCode()
 	{
@@ -117,6 +137,5 @@ public class Coordinates<X, Y, Z> implements Comparable, Serializable
 		Coordinates<?, ?, ?> that = (Coordinates<?, ?, ?>) o;
 
 		return !(getX() != null ? !getX().equals(that.getX()) : that.getX() != null) && !(getY() != null ? !getY().equals(that.getY()) : that.getY() != null) && !(getZ() != null ? !getZ().equals(that.getZ()) : that.getZ() != null);
-
 	}
 }
