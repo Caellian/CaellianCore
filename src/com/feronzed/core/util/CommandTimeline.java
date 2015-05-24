@@ -7,25 +7,6 @@ import java.util.Stack;
  */
 public class CommandTimeline
 {
-	public Stack<Command> undoStack;
-	public Stack<Command> redoStack;
-
-	public abstract class Command
-	{
-		public void firstExecute()
-		{
-			undoStack.add(this);
-			redoStack.clear();
-		}
-
-		public void execute()
-		{
-			undoStack.add(this);
-		}
-
-		public void undo()
-		{
-			redoStack.push(this);
-		}
-	}
+	public Stack<Command> undoStack = new Stack<>();
+	public Stack<Command> redoStack = new Stack<>();
 }
