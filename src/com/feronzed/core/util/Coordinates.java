@@ -98,9 +98,9 @@ public class Coordinates<X, Y, Z> implements Comparable, Serializable
 		return z;
 	}
 
-	public void setX(X x)
+	public void setZ(Z z)
 	{
-		this.x = x;
+		this.z = z;
 	}
 
 	public void setY(Y y)
@@ -108,9 +108,9 @@ public class Coordinates<X, Y, Z> implements Comparable, Serializable
 		this.y = y;
 	}
 
-	public void setZ(Z z)
+	public void setX(X x)
 	{
-		this.z = z;
+		this.x = x;
 	}
 
 	@Override

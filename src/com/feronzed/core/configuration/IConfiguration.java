@@ -20,6 +20,8 @@ package com.feronzed.core.configuration;
 
 /**
  * Created on 06.03.15.
+ *
+ * Used purely as a way of marking classes as configuration classes.
  */
 public interface IConfiguration
 {

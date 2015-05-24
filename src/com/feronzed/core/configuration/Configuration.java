@@ -48,9 +48,7 @@ public class Configuration
 	{
 		if (currentState != State.NULL && currentState != State.IN_PROGRESS)
 		{
-			ConfigurationLoader configurationLoader = new ConfigurationLoader();
-			configurationLoader.setDaemon(true);
-			configurationLoader.start();
+			new ConfigurationLoader().start();
 		}
 	}
 
@@ -59,15 +57,69 @@ public class Configuration
 		return currentState;
 	}
 
+	public void updateConfigFile()
+	{
+		if (currentState == State.FINISHED)
+		{
+			try
+			{
+				Class configClass = configurationClass.getClass();
+				Field[] configurationOptions = configClass.getDeclaredFields();
+
+				for (final Field field : configurationOptions)
+				{
+					try
+					{
+						field.setAccessible(true);
+						properties.setProperty(field.getName().toLowerCase(), field.get(field).toString());
+					} catch (IllegalAccessException ia)
+					{
+						System.err.println("Unable to store configuration for '" + field.getName() + "', skipping...");
+						ia.printStackTrace();
+					}
+				}
+
+				OutputStream out = new FileOutputStream(new File(documentName));
+				properties.store(out, "Configuration file:");
+				out.close();
+			} catch (IOException e)
+			{
+				System.err.println("Couldn't update configuration file!");
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public enum State
 	{
 		NULL, DORMANT, IN_PROGRESS, FINISHED, FAILED
+	}
+
+	protected class ConfigurationManager extends Thread
+	{
+
+		public ConfigurationManager()
+		{
+			this.setDaemon(true);
+		}
+
+		@Override
+		public void run()
+		{
+			super.run();
+			updateConfigFile();
+		}
 	}
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")
 	protected class ConfigurationLoader extends Thread
 	{
 		private boolean stop = false;
+
+		protected ConfigurationLoader()
+		{
+			this.setDaemon(true);
+		}
 
 		@Override
 		public void run()
@@ -164,21 +216,22 @@ public class Configuration
 						}
 					}
 				}
-
-				File file = new File(documentName);
-				OutputStream out = new FileOutputStream(file);
+				OutputStream out = new FileOutputStream(new File(documentName));
 				properties.store(out, "Configuration file:");
-
+				out.close();
 			} catch (FileNotFoundException fnf)
 			{
 				System.err.println("Couldn't find '" + documentName + "' file.");
 				currentState = Configuration.State.FAILED;
+				fnf.printStackTrace();
 			} catch (IOException ioe)
 			{
 				System.err.println("Unable to write '" + documentName + "' file.");
 				currentState = Configuration.State.FAILED;
+				ioe.printStackTrace();
 			}
 			currentState = Configuration.State.FINISHED;
+			new ConfigurationManager().start();
 			try
 			{
 				this.join();

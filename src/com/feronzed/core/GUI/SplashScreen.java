@@ -29,21 +29,6 @@ public class SplashScreen extends JFrame
 		this.setLocationRelativeTo(null);
 	}
 
-	//	public void setDisplayImage(URI imagePath)
-	//	{
-	//		try
-	//		{
-	//			panel.removeAll();
-	//			JLabel label = new JLabel(new ImageIcon(imagePath.toURL()));
-	//			label.setSize(this.getSize());
-	//			this.pack();
-	//		} catch (MalformedURLException e)
-	//		{
-	//			System.err.println("Received a malformed url/uri!");
-	//			e.printStackTrace();
-	//		}
-	//	}
-
 	public void showSplash()
 	{
 		this.setOpacity(0);
