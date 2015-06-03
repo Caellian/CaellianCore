@@ -16,14 +16,14 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.feronzed.core;
+package com.caellyan.core;
 
 import java.util.HashMap;
 
 /**
  * Created on 06.03.15.
  */
-public class ArgumentHandler
+public class ArgumentHelper
 {
 	private HashMap<String, Action> argumentMap = new HashMap<>();
 
@@ -42,9 +42,9 @@ public class ArgumentHandler
 		argumentMap.clear();
 	}
 
-	public void bind(ArgumentHandler argumentHandler)
+	public void bind(ArgumentHelper argumentHelper)
 	{
-		argumentMap.putAll(argumentHandler.getAllArguments());
+		argumentMap.putAll(argumentHelper.getAllArguments());
 	}
 
 	protected HashMap<String, Action> getAllArguments()

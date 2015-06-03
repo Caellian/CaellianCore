@@ -16,7 +16,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.feronzed.core.configuration;
+package com.caellyan.core.configuration;
 
 /**
  * Created on 06.03.15.

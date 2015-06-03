@@ -1,4 +1,4 @@
-package com.feronzed.core.GUI;
+package com.caellyan.core.GUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

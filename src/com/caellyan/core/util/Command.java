@@ -1,4 +1,4 @@
-package com.feronzed.core.util;
+package com.caellyan.core.util;
 
 /**
  * Created by caellian on 24.05.15..
