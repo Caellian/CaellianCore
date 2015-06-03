@@ -1,6 +1,6 @@
 /*
- * Software developed by Feronzed.
- * Copyright (C) 2015 Feronzed
+ * CaellianCore, universal library
+ * Copyright (C) 2015 Caellian
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,17 +13,17 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.feronzed.core;
+package com.caellyan.core;
 
 import java.util.HashMap;
 
 /**
  * Created on 06.03.15.
  */
-public class ArgumentHandler
+public class ArgumentHelper
 {
 	private HashMap<String, Action> argumentMap = new HashMap<>();
 
@@ -42,9 +42,9 @@ public class ArgumentHandler
 		argumentMap.clear();
 	}
 
-	public void bind(ArgumentHandler argumentHandler)
+	public void bind(ArgumentHelper argumentHelper)
 	{
-		argumentMap.putAll(argumentHandler.getAllArguments());
+		argumentMap.putAll(argumentHelper.getAllArguments());
 	}
 
 	protected HashMap<String, Action> getAllArguments()
