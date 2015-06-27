@@ -21,7 +21,7 @@ package com.caellyan.core.processManagement;
 /**
  * Created by Caellian on 27.6.2015., at 15:09.
  */
-public abstract class Command
+public class Command
 {
 	private final ExecutionTimeline timeline;
 
@@ -41,5 +41,10 @@ public abstract class Command
 
 	public void redo()
 	{
+	}
+
+	public void addKeybind(KeybindManager manager, Integer... keys)
+	{
+		manager.addKeybind(this, keys);
 	}
 }

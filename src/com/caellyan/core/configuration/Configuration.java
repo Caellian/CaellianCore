@@ -24,15 +24,15 @@ import java.util.Properties;
 
 /**
  * Created on 06.03.15.
- *
+ * <p>
  * This is universal class for easy configuration loading.
  */
 public class Configuration
 {
 	private final IConfiguration configurationClass;
-	private Properties properties = new Properties();
-	private String documentName = "settings.cfg";
-	private State  currentState = State.NULL;
+	private Properties properties   = new Properties();
+	private String     documentName = "settings.cfg";
+	private State      currentState = State.NULL;
 
 	public Configuration(IConfiguration parConfigurationClass)
 	{
@@ -65,6 +65,7 @@ public class Configuration
 
 	/**
 	 * Returns current loading state.
+	 *
 	 * @return current loading state
 	 */
 	public State getCurrentState()
@@ -216,6 +217,10 @@ public class Configuration
 							else if (field.getType().isAssignableFrom(Character.class))
 							{
 								field.set(field, properties.getProperty(field.getName().toLowerCase()).toCharArray()[0]);
+							}
+							else if (field.getType().isAssignableFrom(String.class))
+							{
+								field.set(field, properties.getProperty(field.getName().toLowerCase()));
 							}
 						} catch (Exception e)
 						{
