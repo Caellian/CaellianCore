@@ -16,13 +16,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core.configuration;
+package com.caellyan.core.processManagement;
+
+import java.util.Stack;
 
 /**
- * Created on 06.03.15.
- *
- * This interface is used as a way of marking classes as configuration classes.
+ * Created by Caellian on 27.6.2015., at 15:21.
  */
-public interface IConfiguration
+public class ExecutionTimeline
 {
+	private Stack<Command> past   = new Stack<>();
+	private Stack<Command> future = new Stack<>();
+
+	public void commandExecuted(Command command)
+	{
+		past.push(command);
+		future.clear();
+	}
+
+	public void redo()
+	{
+		future.pop().redo();
+	}
+
+	public void undo()
+	{
+		Command command = past.pop();
+		future.push(command);
+		command.undo();
+	}
 }

@@ -1,15 +1,19 @@
 /*
- * Atlas Conscientia, artificial consciousness
- * Copyright (c) 2015 Skythees
+ * CaellianCore, universal library
+ * Copyright (C) 2015 Caellian
  *
- * This project has been abandoned and thus you can redistribute it and/or modify
- * it under no terms.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * This project is distributed in the hope that it will be useful,
+ * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * It might or is not in functioning state. Skythees isn't and will not be held
- * responsible for any consequences it might have on any software/hardware.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.caellyan.core.configuration;
@@ -20,12 +24,13 @@ import java.util.Properties;
 
 /**
  * Created on 06.03.15.
+ *
+ * This is universal class for easy configuration loading.
  */
-@SuppressWarnings("UnusedDeclaration")
 public class Configuration
 {
+	private final IConfiguration configurationClass;
 	private Properties properties = new Properties();
-	private IConfiguration configurationClass;
 	private String documentName = "settings.cfg";
 	private State  currentState = State.NULL;
 
@@ -35,11 +40,21 @@ public class Configuration
 		currentState = State.DORMANT;
 	}
 
+	/**
+	 * Changes configuration file name.
+	 * Can be used before either saving or loading the file.
+	 *
+	 * @param name
+	 * 		  new file name.
+	 */
 	public void changeConfigName(String name)
 	{
 		documentName = name + ".cfg";
 	}
 
+	/**
+	 * Loads configuration for {@code configurationClass}.
+	 */
 	public void loadConfig()
 	{
 		if (currentState != State.NULL && currentState != State.IN_PROGRESS)
@@ -48,11 +63,18 @@ public class Configuration
 		}
 	}
 
+	/**
+	 * Returns current loading state.
+	 * @return current loading state
+	 */
 	public State getCurrentState()
 	{
 		return currentState;
 	}
 
+	/**
+	 *
+	 */
 	public void updateConfigFile()
 	{
 		if (currentState == State.FINISHED)
@@ -84,6 +106,10 @@ public class Configuration
 				e.printStackTrace();
 			}
 		}
+		else
+		{
+			System.err.println("Configuration not yet loaded!");
+		}
 	}
 
 	public enum State
@@ -93,7 +119,6 @@ public class Configuration
 
 	protected class ConfigurationManager extends Thread
 	{
-
 		public ConfigurationManager()
 		{
 			this.setDaemon(true);
@@ -107,7 +132,6 @@ public class Configuration
 		}
 	}
 
-	@SuppressWarnings("ResultOfMethodCallIgnored")
 	protected class ConfigurationLoader extends Thread
 	{
 		private boolean stop = false;

@@ -16,13 +16,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core.configuration;
+package com.caellyan.core.processManagement;
 
 /**
- * Created on 06.03.15.
- *
- * This interface is used as a way of marking classes as configuration classes.
+ * Created by Caellian on 27.6.2015., at 15:09.
  */
-public interface IConfiguration
+public abstract class Command
 {
+	private final ExecutionTimeline timeline;
+
+	public Command(ExecutionTimeline executionTimeline)
+	{
+		timeline = executionTimeline;
+	}
+
+	public void execute()
+	{
+		timeline.commandExecuted(this);
+	}
+
+	public void undo()
+	{
+	}
+
+	public void redo()
+	{
+	}
 }
