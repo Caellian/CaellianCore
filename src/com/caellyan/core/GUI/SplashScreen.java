@@ -29,7 +29,13 @@ import java.net.URL;
  */
 public class SplashScreen extends JFrame
 {
-	public SplashScreen(URL image) throws HeadlessException
+
+	public SplashScreen(URL image)
+	{
+		this(image, null);
+	}
+
+	public SplashScreen(URL image, URL icon) throws HeadlessException
 	{
 		try
 		{
@@ -38,6 +44,10 @@ public class SplashScreen extends JFrame
 		{
 			System.err.println("Unable to set splash screen image!");
 			e.printStackTrace();
+		}
+		if (icon != null)
+		{
+			this.setIconImage(new ImageIcon(icon).getImage());
 		}
 		this.setResizable(false);
 		this.setUndecorated(true);

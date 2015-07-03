@@ -16,47 +16,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core.processManagement;
+package com.caellyan.core.GUI.components;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
- * Created by Caellian on 27.6.2015., at 15:09.
+ * Created by Caellian on 27.6.2015., at 23:43.
  */
-public class Command extends AbstractAction
+public class ColorDisplayPanel extends JPanel
 {
-	private final ExecutionTimeline timeline;
+	final String csString;
+	ColorDisplayPanel self;
 
-	public Command(ExecutionTimeline executionTimeline)
+	public ColorDisplayPanel(String title)
 	{
-		timeline = executionTimeline;
-	}
-
-	public Command undo()
-	{
-		return this;
-	}
-
-	public Command redo()
-	{
-		return this;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		this.execute();
-	}
-
-	public Command execute()
-	{
-		timeline.commandExecuted(this);
-		return this;
-	}
-
-	public ExecutionTimeline getTimeline()
-	{
-		return timeline;
+		super(null);
+		self = this;
+		csString = title;
+		this.setBackground(Color.WHITE);
+		this.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				super.mouseClicked(e);
+				self.setBackground(JColorChooser.showDialog(self, csString, null));
+			}
+		});
 	}
 }
