@@ -18,6 +18,8 @@
 
 package com.caellyan.core.GUI.components;
 
+import com.caellyan.core.processManagement.Command;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -30,6 +32,7 @@ public class ColorDisplayPanel extends JPanel
 {
 	final String csString;
 	ColorDisplayPanel self;
+	Command executeAfter = null;
 
 	public ColorDisplayPanel(String title)
 	{
@@ -44,7 +47,17 @@ public class ColorDisplayPanel extends JPanel
 			{
 				super.mouseClicked(e);
 				self.setBackground(JColorChooser.showDialog(self, csString, null));
+				if (executeAfter != null)
+				{
+					executeAfter.execute();
+				}
 			}
 		});
+	}
+
+	public ColorDisplayPanel executeCommandAfter(Command command)
+	{
+		executeAfter = command;
+		return this;
 	}
 }

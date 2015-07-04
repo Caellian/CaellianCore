@@ -20,6 +20,7 @@ package com.caellyan.core.configuration;
 
 import java.io.*;
 import java.lang.reflect.Field;
+import java.util.Objects;
 import java.util.Properties;
 
 /**
@@ -74,7 +75,8 @@ public class Configuration
 	}
 
 	/**
-	 *
+	 * Updates configuration file.
+	 * This method should be used after initialisation to store configuration if it has been changed.
 	 */
 	public void updateConfigFile()
 	{
@@ -113,6 +115,9 @@ public class Configuration
 		}
 	}
 
+	/**
+	 * Enumeration of different states configuration could be in during initialisation phase.
+	 */
 	public enum State
 	{
 		NULL, DORMANT, IN_PROGRESS, FINISHED, FAILED
@@ -186,35 +191,35 @@ public class Configuration
 						try
 						{
 							field.setAccessible(true);
-							if (field.getType().isAssignableFrom(Byte.class))
+							if (field.getType().isAssignableFrom(Byte.class) || Objects.equals(field.getType().toString(), "byte"))
 							{
 								field.set(field, Byte.parseByte(properties.getProperty(field.getName().toLowerCase())));
 							}
-							else if (field.getType().isAssignableFrom(Short.class))
+							else if (field.getType().isAssignableFrom(Short.class) || Objects.equals(field.getType().toString(), "short"))
 							{
 								field.set(field, Short.parseShort(properties.getProperty(field.getName().toLowerCase())));
 							}
-							else if (field.getType().isAssignableFrom(Integer.class))
+							else if (field.getType().isAssignableFrom(Integer.class) || Objects.equals(field.getType().toString(), "int"))
 							{
 								field.set(field, Integer.parseInt(properties.getProperty(field.getName().toLowerCase())));
 							}
-							else if (field.getType().isAssignableFrom(Long.class))
+							else if (field.getType().isAssignableFrom(Long.class) || Objects.equals(field.getType().toString(), "long"))
 							{
 								field.set(field, Long.parseLong(properties.getProperty(field.getName().toLowerCase())));
 							}
-							else if (field.getType().isAssignableFrom(Float.class))
+							else if (field.getType().isAssignableFrom(Float.class) || Objects.equals(field.getType().toString(), "float"))
 							{
 								field.set(field, Float.parseFloat(properties.getProperty(field.getName().toLowerCase())));
 							}
-							else if (field.getType().isAssignableFrom(Double.class))
+							else if (field.getType().isAssignableFrom(Double.class) || Objects.equals(field.getType().toString(), "double"))
 							{
 								field.set(field, Double.parseDouble(properties.getProperty(field.getName().toLowerCase())));
 							}
-							else if (field.getType().isAssignableFrom(Boolean.class))
+							else if (field.getType().isAssignableFrom(Boolean.class) || Objects.equals(field.getType().toString(), "boolean"))
 							{
 								field.set(field, Boolean.parseBoolean(properties.getProperty(field.getName().toLowerCase())));
 							}
-							else if (field.getType().isAssignableFrom(Character.class))
+							else if (field.getType().isAssignableFrom(Character.class) || Objects.equals(field.getType().toString(), "character"))
 							{
 								field.set(field, properties.getProperty(field.getName().toLowerCase()).toCharArray()[0]);
 							}
