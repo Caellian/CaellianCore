@@ -26,63 +26,65 @@ import java.util.SortedSet;
 /**
  * Created by Caellian on 3.7.2015., at 16:55.
  */
-public class VersionHistory extends ArrayList<Version> implements SortedSet<Version>, Comparator<Version>
+public class VersionHistory extends ArrayList<VersionData> implements SortedSet<VersionData>, Comparator<VersionData>
 {
-
 	public VersionHistory()
 	{
 	}
 
-	public VersionHistory(List<Version> versions)
+	public VersionHistory(List<VersionData> versionDatas)
 	{
-		this.addAll(versions);
+		this.addAll(versionDatas);
 		this.sort(this);
 	}
 
 	@Override
-	public Comparator<? super Version> comparator()
+	public Comparator<? super VersionData> comparator()
 	{
 		return this;
 	}
 
+	@SuppressWarnings("NullableProblems")
 	@Override
-	public SortedSet<Version> subSet(Version fromElement, Version toElement)
+	public SortedSet<VersionData> subSet(VersionData fromElement, VersionData toElement)
 	{
-		ArrayList<Version> versions = new ArrayList<>();
+		ArrayList<VersionData> versionDatas = new ArrayList<>();
 		for (int version = this.indexOf(fromElement); version < this.indexOf(toElement); version++)
 		{
-			versions.add(this.get(version));
+			versionDatas.add(this.get(version));
 		}
-		return new VersionHistory(versions);
+		return new VersionHistory(versionDatas);
 	}
 
+	@SuppressWarnings("NullableProblems")
 	@Override
-	public SortedSet<Version> headSet(Version toElement)
+	public SortedSet<VersionData> headSet(VersionData toElement)
 	{
-		ArrayList<Version> versions = new ArrayList<>();
+		ArrayList<VersionData> versionDatas = new ArrayList<>();
 		for (int version = 0; version < this.indexOf(toElement); version++)
 		{
-			versions.add(this.get(version));
+			versionDatas.add(this.get(version));
 		}
-		return new VersionHistory(versions);
+		return new VersionHistory(versionDatas);
 	}
 
+	@SuppressWarnings("NullableProblems")
 	@Override
-	public SortedSet<Version> tailSet(Version fromElement)
+	public SortedSet<VersionData> tailSet(VersionData fromElement)
 	{
-		ArrayList<Version> versions = new ArrayList<>();
+		ArrayList<VersionData> versionDatas = new ArrayList<>();
 		for (int version = this.indexOf(fromElement); version < this.size(); version++)
 		{
-			versions.add(this.get(version));
+			versionDatas.add(this.get(version));
 		}
-		return new VersionHistory(versions);
+		return new VersionHistory(versionDatas);
 	}
 
 	/**
 	 * @return latest version.
 	 */
 	@Override
-	public Version first()
+	public VersionData first()
 	{
 		return this.get(0);
 	}
@@ -91,14 +93,14 @@ public class VersionHistory extends ArrayList<Version> implements SortedSet<Vers
 	 * @return oldest version.
 	 */
 	@Override
-	public Version last()
+	public VersionData last()
 	{
 		return this.get(this.size() - 1);
 	}
 
 	@Override
-	public int compare(Version preVersion, Version postVersion)
+	public int compare(VersionData preVersionData, VersionData postVersionData)
 	{
-		return preVersion.getVersionValue() - postVersion.getVersionValue();
+		return preVersionData.compareTo(postVersionData);
 	}
 }

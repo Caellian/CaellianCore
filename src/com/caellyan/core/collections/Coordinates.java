@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core.util;
+package com.caellyan.core.collections;
 
 import java.io.Serializable;
 

@@ -18,6 +18,9 @@
 
 package com.caellyan.core;
 
+import com.caellyan.core.processManagement.Command;
+
+import java.lang.reflect.Type;
 import java.util.HashMap;
 
 /**
@@ -25,10 +28,20 @@ import java.util.HashMap;
  */
 public class ArgumentHelper
 {
-	private HashMap<String, Action> argumentMap = new HashMap<>();
+	private HashMap<String, Command> argumentMap    = new HashMap<>();
+	private HashMap<String, Command> varArgumentMap = new HashMap<>();
+	private HashMap<String, Type>    varTypeMap     = new HashMap<>();
 	private String lastAdded;
 
-	public ArgumentHelper addArgument(String argument, Action result)
+	public ArgumentHelper addVariableArgument(String argument, Type inputType, Command result)
+	{
+		varArgumentMap.put(argument, result);
+		varTypeMap.put(argument, inputType);
+		lastAdded = argument;
+		return this;
+	}
+
+	public ArgumentHelper addArgument(String argument, Command result)
 	{
 		argumentMap.put(argument, result);
 		lastAdded = argument;
@@ -64,25 +77,69 @@ public class ArgumentHelper
 		argumentMap.putAll(argumentHelper.getAllArguments());
 	}
 
-	protected HashMap<String, Action> getAllArguments()
+	protected HashMap<String, Command> getAllArguments()
 	{
 		return argumentMap;
 	}
 
-	public boolean handleArguments(String[] args)
+	public void handleArguments(String[] args)
 	{
-		for (final String input : args)
+		for (int argPos = 0; argPos < args.length; argPos++)
 		{
-			if (argumentMap.containsKey(input))
+			if (argumentMap.containsKey(args[argPos]))
 			{
-				return argumentMap.get(input).execute();
+				argumentMap.get(args[argPos]).execute();
+			}
+			if (varArgumentMap.containsKey(args[argPos]))
+			{
+				try
+				{
+					if (varTypeMap.get(args[argPos]) == (Byte.class))
+					{
+						varArgumentMap.get(args[argPos]).execute(Byte.parseByte(args[argPos + 1]));
+					}
+					else if (varTypeMap.get(args[argPos]) == (Short.class))
+					{
+						varArgumentMap.get(args[argPos]).execute(Short.parseShort(args[argPos + 1]));
+					}
+					else if (varTypeMap.get(args[argPos]) == (Integer.class))
+					{
+						varArgumentMap.get(args[argPos]).execute(Integer.parseInt(args[argPos + 1]));
+					}
+					else if (varTypeMap.get(args[argPos]) == (Long.class))
+					{
+						varArgumentMap.get(args[argPos]).execute(Long.parseLong(args[argPos + 1]));
+					}
+					else if (varTypeMap.get(args[argPos]) == (Float.class))
+					{
+						varArgumentMap.get(args[argPos]).execute(Float.parseFloat(args[argPos + 1]));
+					}
+					else if (varTypeMap.get(args[argPos]) == (Double.class))
+					{
+						varArgumentMap.get(args[argPos]).execute(Double.parseDouble(args[argPos + 1]));
+					}
+					else if (varTypeMap.get(args[argPos]) == (Boolean.class))
+					{
+						varArgumentMap.get(args[argPos]).execute(Boolean.parseBoolean(args[argPos + 1]));
+					}
+					else if (varTypeMap.get(args[argPos]) == (Character.class))
+					{
+						varArgumentMap.get(args[argPos]).execute((args[argPos + 1]).charAt(0));
+					}
+					else if (varTypeMap.get(args[argPos]) == (String.class))
+					{
+						varArgumentMap.get(args[argPos]).execute(Byte.parseByte(args[argPos + 1]));
+					}
+					else
+					{
+						System.err.println("Argument using unsupported type: " + varTypeMap.get(args[argPos]) + "(" + args[argPos] + ")");
+					}
+				} catch (Exception e)
+				{
+					System.err.println("Incorrect argument configuration at:" + argPos + "(" + args[argPos] + ")");
+					e.printStackTrace();
+				}
 			}
 		}
-		return true;
-	}
-
-	public interface Action
-	{
-		boolean execute();
 	}
 }

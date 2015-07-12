@@ -37,6 +37,7 @@ import java.util.Optional;
  * <p>
  * Created by Caellian on 3.7.2015., at 3:05.
  */
+@SuppressWarnings("unused")
 public class VersionManager
 {
 	public VersionHistory versions = new VersionHistory();
@@ -65,7 +66,7 @@ public class VersionManager
 			{
 				if (Objects.equals(source.getNodeName(), "version"))
 				{
-					String version = null;
+					Version version = null;
 					String name = null;
 					String changelog = null;
 					URL download = null;
@@ -75,7 +76,8 @@ public class VersionManager
 						switch (dataNode.getNodeName())
 						{
 							case "version":
-								version = dataNode.getTextContent();
+								String[] versionStrings = dataNode.getTextContent().split("\\.");
+								version = new Version(Short.parseShort(versionStrings[0]), Short.parseShort(versionStrings[1]), Short.parseShort(versionStrings[2]));
 								break;
 							case "name":
 								String possibleName = dataNode.getTextContent();
@@ -96,7 +98,7 @@ public class VersionManager
 								break;
 						}
 					}
-					versions.add(new Version(version, name != null ? Optional.of(name) : Optional.<String>empty(), changelog != null ? Optional.of(changelog) : Optional.<String>empty(), download != null ? Optional.of(download) : Optional.<URL>empty()));
+					versions.add(new VersionData(version, name != null ? Optional.of(name) : Optional.<String>empty(), changelog != null ? Optional.of(changelog) : Optional.<String>empty(), download != null ? Optional.of(download) : Optional.<URL>empty()));
 				}
 			}
 		} catch (Exception e)
@@ -117,17 +119,17 @@ public class VersionManager
 	}
 
 	/**
-	 * @param programVersion
+	 * @param programVersionData
 	 * 		  current version of program.
 	 *
 	 * @return true if there is newer version available.
 	 */
-	public boolean checkVersion(Version programVersion)
+	public boolean checkVersion(VersionData programVersionData)
 	{
-		return this.getLatestVersion().compareTo(programVersion) < 0;
+		return this.getLatestVersion().compareTo(programVersionData) < 0;
 	}
 
-	public Version getLatestVersion()
+	public VersionData getLatestVersion()
 	{
 		return versions.first();
 	}

@@ -20,17 +20,26 @@ package com.caellyan.core.processManagement;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
+ * Class used for easy command execution.
+ * <p>
  * Created by Caellian on 27.6.2015., at 15:09.
  */
 public class Command extends AbstractAction
 {
-	private final ExecutionTimeline timeline;
+	protected ArrayList<Object> argumentList = new ArrayList<>();
 
-	public Command(ExecutionTimeline executionTimeline)
+	/**
+	 * @param arguments
+	 * 		  some of the variables used by this command.
+	 * 		  This is preferred in case an unwanted argument has to be given public access.
+	 */
+	public Command(Object... arguments)
 	{
-		timeline = executionTimeline;
+		argumentList.addAll(Arrays.asList(arguments));
 	}
 
 	public Command undo()
@@ -49,14 +58,9 @@ public class Command extends AbstractAction
 		this.execute();
 	}
 
-	public Command execute()
+	public Command execute(Object... arguments)
 	{
-		timeline.commandExecuted(this);
+		argumentList.addAll(Arrays.asList(arguments));
 		return this;
-	}
-
-	public ExecutionTimeline getTimeline()
-	{
-		return timeline;
 	}
 }
