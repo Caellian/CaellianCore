@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core.configuration;
+package com.github.caellian.core.configuration;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -46,7 +46,7 @@ public class Configuration
 	 * Can be used before either saving or loading the file.
 	 *
 	 * @param name
-	 * 		  new file name.
+	 * 		new file name.
 	 */
 	public void changeConfigName(String name)
 	{

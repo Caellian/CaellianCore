@@ -16,9 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core;
+package com.github.caellian.core;
 
-import com.caellyan.core.processManagement.Command;
+import com.github.caellian.core.processManagement.Command;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;

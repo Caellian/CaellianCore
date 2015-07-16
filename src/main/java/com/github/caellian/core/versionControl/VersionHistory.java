@@ -16,7 +16,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core.versionControl;
+package com.github.caellian.core.versionControl;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.SortedSet;
 
 /**
- * Created by Caellian on 3.7.2015., at 16:55.
+ * @author Caellian
  */
 public class VersionHistory extends ArrayList<VersionData> implements SortedSet<VersionData>, Comparator<VersionData>
 {
@@ -72,12 +72,12 @@ public class VersionHistory extends ArrayList<VersionData> implements SortedSet<
 	@Override
 	public SortedSet<VersionData> tailSet(VersionData fromElement)
 	{
-		ArrayList<VersionData> versionDatas = new ArrayList<>();
+		ArrayList<VersionData> versionData = new ArrayList<>();
 		for (int version = this.indexOf(fromElement); version < this.size(); version++)
 		{
-			versionDatas.add(this.get(version));
+			versionData.add(this.get(version));
 		}
-		return new VersionHistory(versionDatas);
+		return new VersionHistory(versionData);
 	}
 
 	/**

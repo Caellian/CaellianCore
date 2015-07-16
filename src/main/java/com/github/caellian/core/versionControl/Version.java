@@ -1,7 +1,7 @@
-package com.caellyan.core.versionControl;
+package com.github.caellian.core.versionControl;
 
 /**
- * Created by Caellian on 12.7.2015., at 0:20.
+ * @author Caellian
  */
 public class Version
 {

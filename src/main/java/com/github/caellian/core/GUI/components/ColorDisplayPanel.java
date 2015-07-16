@@ -16,9 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core.GUI.components;
+package com.github.caellian.core.GUI.components;
 
-import com.caellyan.core.processManagement.Command;
+import com.github.caellian.core.processManagement.Command;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +26,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * Created by Caellian on 27.6.2015., at 23:43.
+ * This component is used to visualize colors in GUIs.
+ * It's color can be changed by clicking on it, and it's color can ba later
+ * applied to other elements.
+ *
+ * @author Caellian
  */
 public class ColorDisplayPanel extends JPanel
 {

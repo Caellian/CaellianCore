@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core.processManagement;
+package com.github.caellian.core.processManagement;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -26,7 +26,8 @@ import java.util.Arrays;
 /**
  * Class used for easy command execution.
  * <p>
- * Created by Caellian on 27.6.2015., at 15:09.
+ *
+ * @author Caellian
  */
 public class Command extends AbstractAction
 {
@@ -34,8 +35,8 @@ public class Command extends AbstractAction
 
 	/**
 	 * @param arguments
-	 * 		  some of the variables used by this command.
-	 * 		  This is preferred in case an unwanted argument has to be given public access.
+	 * 		some of the variables used by this command.
+	 * 		This is preferred in case an unwanted argument has to be given public access.
 	 */
 	public Command(Object... arguments)
 	{

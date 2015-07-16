@@ -16,18 +16,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core.processManagement;
+package com.github.caellian.core.processManagement;
 
 import java.util.ArrayList;
 
 /**
- * Created by Caellian on 27.6.2015., at 16:30.
  * <p>
  * This is an alternative method of execution management. It is highly unstable
  * and is recommended only if you're using it as a layer to build you own execution management on top.
  * <p>
  * This method can also be used for more flexible execution management, but it might cause unpredicted
  * behaviour.
+ *
+ * @author Caellian
  */
 public class ExecutionManagement
 {

@@ -1,0 +1,24 @@
+#Ignore All
+/*
+
+#Except:
+# Source Files
+!/src
+
+#WIP Files
+src/main/java/com/github/caellian/core/util/IterableNodeList.java
+
+# License File
+!/LICENSE
+
+# GitHub Files
+!.gitignore
+!/*.md
+
+# Gradle
+!/build.gradle
+!/build.properties
+!/settings.gradle
+!/gradle.properties
+!/gradlew*
+!/gradle

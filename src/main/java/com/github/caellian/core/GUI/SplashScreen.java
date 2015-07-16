@@ -16,7 +16,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core.GUI;
+package com.github.caellian.core.GUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

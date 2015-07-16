@@ -16,13 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core.collections;
+package com.github.caellian.core.collections;
 
 import java.io.Serializable;
 
 /**
  * Created on 10.5.2015. at 1:27.
- *
+ * <p>
  * Convenience class firstly created for game Petulant archer as a key substitute for maps.
  * This is supposed to allow maps to use 3D (3 variable keys) keys.
  *

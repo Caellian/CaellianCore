@@ -16,7 +16,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core.versionControl;
+package com.github.caellian.core.versionControl;
 
 import com.sun.istack.internal.NotNull;
 
@@ -25,9 +25,10 @@ import java.util.Optional;
 
 /**
  * Class used to store and handle version data.
- * Created by Caellian on 3.7.2015., at 15:24.
+ *
+ * @author Caellian
  */
-@SuppressWarnings("unused")
+
 public class VersionData implements Comparable<VersionData>
 {
 	public final Version          version;

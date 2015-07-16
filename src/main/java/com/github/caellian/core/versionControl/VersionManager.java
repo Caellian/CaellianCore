@@ -16,9 +16,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellyan.core.versionControl;
+package com.github.caellian.core.versionControl;
 
-import com.caellyan.core.util.IterableNodeList;
+import com.github.caellian.core.util.IterableNodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -32,12 +32,13 @@ import java.util.Optional;
 
 /**
  * This is implementation of version handler. It takes a long time to read version files and it
- * is suggested that a {@code com.caellyan.core.SplashScreen} is displayed during initialization period of this
+ * is suggested that a {@code com.github.caellian.core.SplashScreen} is displayed during initialization period of this
  * object.
  * <p>
- * Created by Caellian on 3.7.2015., at 3:05.
+ *
+ * @author Caellian
  */
-@SuppressWarnings("unused")
+
 public class VersionManager
 {
 	public VersionHistory versions = new VersionHistory();
@@ -120,7 +121,7 @@ public class VersionManager
 
 	/**
 	 * @param programVersionData
-	 * 		  current version of program.
+	 * 		current version of program.
 	 *
 	 * @return true if there is newer version available.
 	 */

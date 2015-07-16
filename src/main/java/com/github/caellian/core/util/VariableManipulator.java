@@ -1,10 +1,10 @@
-package com.caellyan.core.util;
+package com.github.caellian.core.util;
 
 import java.util.List;
 import java.util.Random;
 
 /**
- * Created by Caellian on 6.7.2015., at 3:02.
+ * @author Caellian
  */
 public class VariableManipulator
 {
