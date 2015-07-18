@@ -6,6 +6,9 @@ repositories {
 	jcenter()
 }
 
+version = "1.0.0"
+group = "com.caellian.core"
+
 dependencies {
 	compile 'org.slf4j:slf4j-api:1.7.12'
 	
