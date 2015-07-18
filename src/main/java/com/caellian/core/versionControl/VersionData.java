@@ -18,8 +18,6 @@
 
 package com.caellian.core.versionControl;
 
-import com.sun.istack.internal.NotNull;
-
 import java.net.URL;
 import java.util.Optional;
 
@@ -51,7 +49,7 @@ public class VersionData implements Comparable<VersionData>
 
 	@SuppressWarnings("NullableProblems")
 	@Override
-	public int compareTo(@NotNull VersionData other)
+	public int compareTo(VersionData other)
 	{
 		return this.version.major - other.version.major == 0 ? (this.version.minor - other.version.minor == 0 ? (this.version.patch - other.version.patch == 0 ? 0 : (this.version.patch - other.version.patch)) : (this.version.minor - other.version.minor)) : (this.version.major - other.version.major);
 	}
