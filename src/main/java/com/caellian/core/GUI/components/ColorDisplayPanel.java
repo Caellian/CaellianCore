@@ -16,9 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.github.caellian.core.GUI.components;
+package com.caellian.core.GUI.components;
 
-import com.github.caellian.core.processManagement.Command;
+import com.caellian.core.processManagement.Command;
 
 import javax.swing.*;
 import java.awt.*;

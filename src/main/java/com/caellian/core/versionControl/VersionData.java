@@ -16,7 +16,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.github.caellian.core.versionControl;
+package com.caellian.core.versionControl;
 
 import com.sun.istack.internal.NotNull;
 

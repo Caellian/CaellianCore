@@ -16,36 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.github.caellian.core.processManagement;
-
-import java.util.ArrayList;
+package com.caellian.core.configuration;
 
 /**
+ * Created on 06.03.15.
  * <p>
- * This is an alternative method of execution management. It is highly unstable
- * and is recommended only if you're using it as a layer to build you own execution management on top.
- * <p>
- * This method can also be used for more flexible execution management, but it might cause unpredicted
- * behaviour.
- *
- * @author Caellian
+ * This interface is used as a way of marking classes as configuration classes.
  */
-public class ExecutionManagement
+public interface IConfiguration
 {
-	private ArrayList<Command> commandList = new ArrayList<>();
-
-	public void commandExecuted(Command command)
-	{
-		commandList.add(command);
-	}
-
-	public void redo(int position)
-	{
-		commandList.get(position).redo();
-	}
-
-	public void undo(int position)
-	{
-		commandList.get(position).undo();
-	}
 }

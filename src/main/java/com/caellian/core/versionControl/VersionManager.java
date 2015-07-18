@@ -16,9 +16,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.github.caellian.core.versionControl;
+package com.caellian.core.versionControl;
 
-import com.github.caellian.core.util.IterableNodeList;
+import com.caellian.core.util.IterableNodeList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -32,7 +32,7 @@ import java.util.Optional;
 
 /**
  * This is implementation of version handler. It takes a long time to read version files and it
- * is suggested that a {@code com.github.caellian.core.SplashScreen} is displayed during initialization period of this
+ * is suggested that a {@code com.caellian.core.SplashScreen} is displayed during initialization period of this
  * object.
  * <p>
  *

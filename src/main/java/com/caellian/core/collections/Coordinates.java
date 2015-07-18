@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.github.caellian.core.collections;
+package com.caellian.core.collections;
 
 import java.io.Serializable;
 

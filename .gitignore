@@ -6,7 +6,7 @@
 !/src
 
 #WIP Files
-src/main/java/com/github/caellian/core/util/IterableNodeList.java
+src/main/java/com/caellian/core/util/IterableNodeList.java
 
 # License File
 !/LICENSE
@@ -22,3 +22,6 @@ src/main/java/com/github/caellian/core/util/IterableNodeList.java
 !/gradle.properties
 !/gradlew*
 !/gradle
+
+# Maven
+!/pom.xml

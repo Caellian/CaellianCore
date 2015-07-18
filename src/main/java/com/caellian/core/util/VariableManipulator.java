@@ -1,4 +1,4 @@
-package com.github.caellian.core.util;
+package com.caellian.core.util;
 
 import java.util.List;
 import java.util.Random;

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.github.caellian.core.configuration;
+package com.caellian.core.configuration;
 
 import java.io.*;
 import java.lang.reflect.Field;

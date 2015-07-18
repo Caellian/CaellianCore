@@ -1,4 +1,4 @@
-//package com.github.caellian.core.collections;
+//package com.caellian.core.collections;
 //
 //import java.util.*;
 //import java.util.function.Consumer;

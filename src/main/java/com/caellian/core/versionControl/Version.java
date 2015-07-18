@@ -1,4 +1,4 @@
-package com.github.caellian.core.versionControl;
+package com.caellian.core.versionControl;
 
 /**
  * @author Caellian

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.github.caellian.core.processManagement;
+package com.caellian.core.processManagement;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
