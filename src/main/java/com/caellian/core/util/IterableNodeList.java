@@ -13,16 +13,42 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.caellian.core.configuration;
+package com.caellian.core.util;
+
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import java.util.ArrayList;
 
 /**
- * This interface is used to mark classes as configuration classes.
+ * Convenience method created to make Nodes from {@code org.w3c.dom.Node} a lot easier to use
+ * and more compact.
+ * <p>
  *
  * @author Caellian
  */
-public interface IConfiguration
+public class IterableNodeList extends ArrayList<Node> implements NodeList
 {
+	public IterableNodeList(NodeList nodeList)
+	{
+		for (int node = 0; node < nodeList.getLength(); node++)
+		{
+			super.add(node, nodeList.item(node));
+		}
+	}
+
+	@Override
+	public Node item(int index)
+	{
+		return super.get(index);
+	}
+
+	@Override
+	public int getLength()
+	{
+		return super.size();
+	}
 }

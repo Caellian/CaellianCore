@@ -147,6 +147,7 @@ public class Configuration
 			this.setDaemon(true);
 		}
 
+		@SuppressWarnings("ResultOfMethodCallIgnored")
 		@Override
 		public void run()
 		{
@@ -235,14 +236,18 @@ public class Configuration
 					}
 					else
 					{
-						try
+						ConfigData configData = field.getDeclaredAnnotation(ConfigData.class);
+						if ((configData != null && configData.regenerateInvalid()) || configData == null)
 						{
-							field.setAccessible(true);
-							properties.setProperty(field.getName().toLowerCase(), field.get(field).toString());
-						} catch (IllegalAccessException e)
-						{
-							System.err.println("Unable to store configuration for '" + field.getName() + "', skipping...");
-							e.printStackTrace();
+							try
+							{
+								field.setAccessible(true);
+								properties.setProperty(field.getName().toLowerCase(), field.get(field).toString());
+							} catch (IllegalAccessException e)
+							{
+								System.err.println("Unable to store configuration for '" + field.getName() + "', skipping...");
+								e.printStackTrace();
+							}
 						}
 					}
 				}

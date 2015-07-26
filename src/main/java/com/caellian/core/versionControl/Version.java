@@ -40,6 +40,11 @@ public class Version
 		Version version = (Version) o;
 
 		return major == version.major && minor == version.minor && patch == version.patch;
+	}
 
+	@Override
+	public String toString()
+	{
+		return major + "." + minor + "." + patch;
 	}
 }

@@ -1,12 +1,19 @@
 package com.caellian.core.lib;
 
+import com.caellian.core.versionControl.Version;
+import com.caellian.core.versionControl.VersionData;
+
 /**
  * @author Caellian
  */
 public class Reference
 {
-	public static final String PROGRAM_ID      = "caellianCore";
-	public static final String PROGRAM_NAME    = "Caellian Core";
-	public static final String PROGRAM_VERSION = "1.0.2";
-	public static final String PROGRAM_AUTHOR  = "Caellian";
+	public static final String LIBRARY_NAME    = "CaellianCore";
+	public static final String LIBRARY_ID      = "caellian_core";
+	public static final String LIBRARY_VERSION = "#{version}";
+	public static final String LIBRARY_AUTHOR  = "Caellian";
+
+	private static final String[] versionNumbers = LIBRARY_VERSION.split(".");
+
+	public static final VersionData VERSION = new VersionData(new Version(Short.parseShort(versionNumbers[0]), Short.parseShort(versionNumbers[1]), Short.parseShort(versionNumbers[2])));
 }

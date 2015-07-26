@@ -30,8 +30,19 @@ import java.io.Serializable;
  */
 public class Coordinates<X, Y, Z> implements Comparable, Serializable
 {
+	/**
+	 * X coordinate
+	 */
 	private X x;
+
+	/**
+	 * Y coordinate
+	 */
 	private Y y;
+
+	/**
+	 * Z coordinate
+	 */
 	private Z z;
 
 	public Coordinates(X x, Y y, Z z)
@@ -41,6 +52,13 @@ public class Coordinates<X, Y, Z> implements Comparable, Serializable
 		this.z = z;
 	}
 
+	/**
+	 * @param o
+	 * 		Object to compare with this object
+	 *
+	 * @return Positive if 2 or more values of this object are higher than object compared to this.<br/>
+	 * Negative if 2 or more values of this object are lower than object compared to this.
+	 */
 	@Override
 	public int compareTo(Object o)
 	{
@@ -83,36 +101,66 @@ public class Coordinates<X, Y, Z> implements Comparable, Serializable
 		return result;
 	}
 
+	/**
+	 * @return X coordinate
+	 */
 	public X getX()
 	{
 		return x;
 	}
 
+	/**
+	 * @return Y coordinate
+	 */
 	public Y getY()
 	{
 		return y;
 	}
 
+	/**
+	 * @return Z coordinate
+	 */
 	public Z getZ()
 	{
 		return z;
 	}
 
+	/**
+	 * Sets the Z coordinate to given value
+	 *
+	 * @param z
+	 * 		Z coordinate
+	 */
 	public void setZ(Z z)
 	{
 		this.z = z;
 	}
 
+	/**
+	 * Sets the Y coordinate to given value
+	 *
+	 * @param y
+	 * 		Y coordinate
+	 */
 	public void setY(Y y)
 	{
 		this.y = y;
 	}
 
+	/**
+	 * Sets the X coordinate to given value
+	 *
+	 * @param x
+	 * 		X coordinate
+	 */
 	public void setX(X x)
 	{
 		this.x = x;
 	}
 
+	/**
+	 * @return Hashcode of all coordinates
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -122,6 +170,12 @@ public class Coordinates<X, Y, Z> implements Comparable, Serializable
 		return result;
 	}
 
+	/**
+	 * @param o
+	 * 		Object to compare with this object
+	 *
+	 * @return True if all of the coordinates match
+	 */
 	@Override
 	public boolean equals(Object o)
 	{
