@@ -26,7 +26,6 @@ import java.util.Arrays;
 /**
  * Class used for easy command execution.
  * <p>
- *
  * @author Caellian
  */
 public class Command extends AbstractAction

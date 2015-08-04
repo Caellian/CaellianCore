@@ -24,13 +24,13 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 
 /**
- * Created on 06.03.15.
+ * @author Caellian
  */
 public class ArgumentHelper
 {
-	private HashMap<String, Command> argumentMap    = new HashMap<>();
-	private HashMap<String, Command> varArgumentMap = new HashMap<>();
-	private HashMap<String, Type>    varTypeMap     = new HashMap<>();
+	private HashMap<String, Command> argumentMap    = new HashMap<>(0);
+	private HashMap<String, Command> varArgumentMap = new HashMap<>(0);
+	private HashMap<String, Type>    varTypeMap     = new HashMap<>(0);
 	private String lastAdded;
 
 	public ArgumentHelper addVariableArgument(String argument, Type inputType, Command result)
