@@ -6,26 +6,12 @@
  * http://www.gnu.org/licenses/lgpl.html
  ******************************************************************************/
 
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
+package hr.caellian.core.configuration;
 
-repositories {
-	jcenter()
-}
-
-version = "1.0.4"
-group = "com.caellian.core"
-
-dependencies {
-	compile 'org.slf4j:slf4j-api:1.7.12'
-    compile 'com.google.guava:guava:18.0'
-
-    testCompile 'junit:junit:4.12'
-}
-
-processResources {
-	filter {
-		it.replace("#{version}", version)
-	}
+/**
+ * This interface is used to mark classes as configuration classes.
+ *
+ * @author Caellian
+ */
+public interface IConfiguration {
 }

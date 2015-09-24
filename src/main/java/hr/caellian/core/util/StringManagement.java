@@ -6,26 +6,13 @@
  * http://www.gnu.org/licenses/lgpl.html
  ******************************************************************************/
 
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
+package hr.caellian.core.util;
 
-repositories {
-	jcenter()
-}
-
-version = "1.0.4"
-group = "com.caellian.core"
-
-dependencies {
-	compile 'org.slf4j:slf4j-api:1.7.12'
-    compile 'com.google.guava:guava:18.0'
-
-    testCompile 'junit:junit:4.12'
-}
-
-processResources {
-	filter {
-		it.replace("#{version}", version)
-	}
+/**
+ * Helper class created for easy string management.
+ *
+ * @author Caellian
+ */
+public class StringManagement {
+    //TODO
 }

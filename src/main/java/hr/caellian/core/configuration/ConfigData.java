@@ -6,26 +6,17 @@
  * http://www.gnu.org/licenses/lgpl.html
  ******************************************************************************/
 
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
+package hr.caellian.core.configuration;
 
-repositories {
-	jcenter()
-}
-
-version = "1.0.4"
-group = "com.caellian.core"
-
-dependencies {
-	compile 'org.slf4j:slf4j-api:1.7.12'
-    compile 'com.google.guava:guava:18.0'
-
-    testCompile 'junit:junit:4.12'
-}
-
-processResources {
-	filter {
-		it.replace("#{version}", version)
-	}
+/**
+ * This annotation allows more precise configuration options.
+ *
+ * @author Caellian
+ */
+public @interface ConfigData {
+    /**
+     * @return True if this option should be forcefully generated in configuration if it's value is invalid or the
+     * option doesn't exits.
+     */
+    boolean regenerateInvalid() default true;
 }
