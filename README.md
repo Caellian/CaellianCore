@@ -1,5 +1,5 @@
 # CaellianCore
-[ ![Download](https://api.bintray.com/packages/caellian/caellian/CaellianCore/images/download.svg) ](https://bintray.com/caellian/caellian/CaellianCore/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/caellian/caellian/CaellianCore/images/download.svg) [![Build Status](https://drone.io/github.com/Caellian/CaellianCore/status.png)](https://drone.io/github.com/Caellian/CaellianCore/latest) ](https://bintray.com/caellian/caellian/CaellianCore/_latestVersion)
 
 Classes shared across different programs &amp; games created by either me or anyone else who is interested in using this.
 
